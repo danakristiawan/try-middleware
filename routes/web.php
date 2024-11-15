@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -20,10 +20,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/coba-admin', function () {
-    return 'Hello World';
-})->middleware('admin');
+Route::get('/halaman-admin', function () {
+    return 'Hello World ini halaman Admin';
+})->middleware(['auth', 'role:admin']);
 
-Route::get('/coba-user', function () {
-    return 'Hello World';
-})->middleware('user');
+Route::get('/halaman-user', function () {
+    return 'Hello World inii halaman User';
+})->middleware(['auth', 'role:user']);
